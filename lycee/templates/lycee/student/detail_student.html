@@ -1,0 +1,22 @@
+{% extends "master.html" %}
+
+{% if liste %}
+    {% block title %}
+        <h3>Details of a student</h3>
+    {% endblock %}
+
+    {% block content %}
+        <div class="contain">
+            <div class="title">{{ liste.first_name }} {{ liste.last_name }}</div>
+            <div class="list">{{ liste.birth_date }}</div>
+            <div class="list">{{ liste.phone }}</div>
+            <div class="list">{{ liste.email|lower }}</div>
+            <div class="list">{{ liste.cursus }}</div>
+            <button class="button2" type="cancel">
+                Modifier
+            </button>
+        </div>
+    {% endblock %}
+{% else %}
+    <p>No student to show.</p>
+{% endif %}

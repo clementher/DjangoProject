@@ -5,27 +5,81 @@
     <title>{{title}}</title>
     <meta charset="utf-8"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
 
-        <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+    <style>
+        body {
+          font-family: Arial, Helvetica, sans-serif;
+        }
+
+
+    </style>
+
   </head>
 
+
   <body>
+    <div class="nb">
+        <button class="buttonHome" onclick="gohome()">
+            <span class="material-icons">
+                home
+            </span>
+        </button>
+        <div class="dp">
+            <a class="dpbtn">
+                <b>Logiciel de Gestion du Lycée</b>
+            </a>
+            <div class="dp-content">
+                <a class="nav-link" href="/lycee/student/create">
+                    Ajouter un Étudiant
+                </a>
+                <a class="nav-link" href="/lycee/cursus/create">
+                    Ajouter un Cursus
+                </a>
+
+                <div class="dropdown-divider"></div>
+                <a class="nav-link" href="/lycee/call/">
+                    Faire un Appel Particulier
+                </a>
+                <a class="nav-link" href="/lycee/rolls/list/">
+                    Liste des Appels
+                </a>
+                <a class="nav-link" href="/lycee/rolls_student/list/">
+                    Liste des Appels Particuliers
+                </a>
+            </div>
+        </div>
+        <button class="buttonBack" onclick="goBack()">
+            <span class="material-icons">
+                arrow_back
+            </span>
+        </button>
+    </div>
+
     <div class="container">
       <header class="row">
         <div class = "page-header">
-          <h3>{% block title%}{% endblock %}</h3>
+            {% block title%}{% endblock %}
         </div>
       </header>
 
       <article class="row">{% block content %}{% endblock %}</article>
 
-      <footer class ="navbar-fixed-bottom">
-        <p class="text-center"><strong><a href="/lycee"> lycee management</a></strong></p>
-      </footer>
     </div>
 
   </body>
 </html>
+
+<script>
+function goBack() {
+    window.history.back();
+}
+
+function gohome() {
+    document.location.href="/lycee/"
+}
+</script>

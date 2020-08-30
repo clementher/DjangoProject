@@ -3,32 +3,34 @@
 {% if liste %}
 
     {% block title %}
-        <h3>Qui est absent wolah ?</h3>
     {% endblock %}
 
     {% block content %}
-        <div class="containerFlex2">
-            <form method="post">
-                {% csrf_token %}
-                <input type="date" name="date">
-                <!--
-                &nbsp;
-                <input type="time" name="time">
-                -->
+        <div class="margin">
+            <b>Appel du cursus </b>
+            <div class="contain3 card">
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="date" name="date" required><br><br>
+                    De <input type="time" value="08:00" name="debut">
+                    A <input type="time" value="09:00" name="fin">
+                    <!--
+                    &nbsp;
+                    <input type="time" name="time">
+                    -->
                     {% for student in liste %}
-                        <div class="contain">
+                        <div class="description contain">
                             <a href="/lycee/student/{{student.id}}">{{student.first_name}} {{student.last_name}}</a>
-                            <div class="description">
-                                {{student.cursus}}
-                                <input type="checkbox" id="{{student.id}}" name="{{student.id}}">
-                            </div>
+                            <input type="checkbox" id="{{student.id}}" name="{{student.id}}">
                         </div>
                     {% endfor %}
-                <input type="submit">
-            </form>
+                    <br>
+                    <input type="submit">
+                </form>
+            </div>
         </div>
     {% endblock %}
 
 {% else %}
-    <p>No student to show.</p>
+    <p>No list to show.</p>
 {% endif %}

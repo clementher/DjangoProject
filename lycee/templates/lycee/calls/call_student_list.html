@@ -1,0 +1,42 @@
+{% extends "master.html" %}
+
+{% if liste %}
+
+    {% block title %}
+    {% endblock %}
+
+    {% block content %}
+        <div class="margin">
+            <b>Appels Particuliers</b>
+            <div class="contain3 card">
+            {% for roll in liste %}
+                {% if roll.absent == 1 %}
+                <div class="description2 contain">
+                    <div style="display: flex; flex-direction: column; color: red; justify-content: space-between;">
+                        <div class="helptext">{{roll.date}}&nbsp;{{roll.debut}}-{{roll.fin}}</div>
+                        <b>Absent&nbsp;</b>
+                        <a href="/lycee/student/{{roll.student.id}}">
+                            {{roll.student.email}}
+                        </a>
+                        <i style="color: #4c4c4c;">"{{roll.cause}}"</i>
+
+                    </div>
+                </div>
+                {% else %}
+                <div class="description2 contain">
+                    <div style="display: flex; flex-direction: column; justify-content: space-between;">
+                        <div class="helptext">{{roll.date}}&nbsp;{{roll.debut}}-{{roll.fin}}</div>
+                        <b>Présent&nbsp;</b>
+                        <a href="/lycee/student/{{roll.student.id}}">{{roll.student.email}}</a>
+                    </div>
+                </div>
+                {% endif %}
+
+            {% endfor %}
+            </div>
+        </div>
+    {% endblock %}
+
+{% else %}
+    <p>No call to show.</p>
+{% endif %}

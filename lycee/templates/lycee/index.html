@@ -3,24 +3,59 @@
 
 {% if liste%}
   {% block title %}
-    <h3>List of programs</h3>
   {% endblock %}
 
   {% block content %}
 
-    {% for cursus in liste %}
-    <div class="container padding">
-        <div class="row">
-            <div class = "containerFlex">
-                <a href="/lycee/{{cursus.id}}">{{cursus.name}}</a>
-                <button class="button" type="cancel">
-                    <a href="/lycee/call_of_roll/{{cursus.id}}">Call of roll</a>
-                </button>
+    <div class="margin">
+        <b>Liste des Cursus</b>
+        <div class="container padding">
+            <div class="row">
+            {% for cursus in liste %}
+
+
+                <div class = "containerFlex card curs">
+                    <a href="/lycee/{{cursus.id}}">{{cursus.name}}</a>
+                    <button class="button appel" type="cancel">
+                        <a href="/lycee/call_of_roll/{{cursus.id}}">Appel</a>
+                    </button>
+                </div>
+
+
+            {% endfor %}
             </div>
         </div>
     </div>
 
-    {% endfor %}
+    <div class="margin">
+        <b>Fonctionnalités</b>
+        <div class="container padding">
+            <div class="row">
+
+                <div class = "home">
+                    <span class="material-icons icon">person_add_alt_1</span>
+                    <a href="/lycee/student/create">Ajouter un Étudiant</a>
+                </div>
+                <div class = "home">
+                    <span class="material-icons icon">post_add</span>
+                    <a href="/lycee/cursus/create">Ajouter un Cursus</a>
+                </div>
+                <div class = "home">
+                    <span class="material-icons icon">perm_identity</span>
+                    <a href="/lycee/call/">Faire un Appel Particulier</a>
+                </div>
+                <div class = "home">
+                    <span class="material-icons icon">receipt_long</span>
+                    <a href="/lycee/rolls/list/">Liste des Appels</a>
+                </div>
+                <div class = "home">
+                    <span class="material-icons icon">receipt</span>
+                    <a href="/lycee/rolls_student/list/">Liste des Appels Particuliers</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
   {% endblock %}
 {% else %}
   <p> No cursus to show .</p>

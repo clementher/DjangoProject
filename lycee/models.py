@@ -2,6 +2,7 @@ from django.db import models
 import datetime
 
 # Create your models here.
+from django.forms import forms
 
 
 class Cursus(models.Model):
@@ -9,7 +10,7 @@ class Cursus(models.Model):
         max_length=50,
         blank=False,
         null=True,
-        default='aucun'
+        default='Nom'
     )
 
     year_from_bac = models.SmallIntegerField(
@@ -17,14 +18,14 @@ class Cursus(models.Model):
         verbose_name="year",
         blank=False,
         null=True,
-        default=0
+        default=1
     )
 
     scholar_year = models.CharField(
         max_length=9,
         blank=False,
         null=True,
-        default='0000-00001'
+        default='2019-2020'
     )
 
     def __str__(self):
@@ -46,7 +47,6 @@ class Student(models.Model):
 
     last_name = models.CharField(
         verbose_name="lastname",
-        help_text="last name of the student",
         blank=False,  # pas de champ vide
         null=False,  # pas de champ null (a conjuguer avec default
         default="???",
@@ -55,7 +55,7 @@ class Student(models.Model):
 
     phone = models.CharField(
         verbose_name="phonenumber",
-        help_text="phone number of the student",
+        help_text="Phone number of the student",
         blank=False,  # pas de champ vide
         null=False,  # pas de champ null (a conjuguer avec default
         default="0999999999",
@@ -64,7 +64,7 @@ class Student(models.Model):
 
     email = models.EmailField(
         verbose_name="email",
-        help_text="phone number of the student",
+        help_text="Email of the student",
         blank=False,  # pas de champ vide
         null=False,  # pas de champ null (a conjuguer avec default
         default="x@y.z",
@@ -73,7 +73,7 @@ class Student(models.Model):
 
     comments = models.CharField(
         verbose_name="comments",
-        help_text="some comments about the student",
+        help_text="Some comments about the student",
         blank=True,
         null=False,  # pas de champ null (a conjuguer avec default
         default="",
@@ -82,6 +82,7 @@ class Student(models.Model):
 
     cursus = models.ForeignKey(
         Cursus,
+        help_text="Cursus of the student",
         on_delete=models.CASCADE,  # necessaire selon la version de Django
         null=True
     )
@@ -91,6 +92,34 @@ class Student(models.Model):
 
 
 class Roll(models.Model):
+    date = models.DateField(
+        blank=False,
+        null=False,
+        default=datetime.date.today
+    )
+
+    cursus = models.ForeignKey(
+        Cursus,
+        on_delete=models.CASCADE,  # necessaire selon la version de Django
+        null=False
+    )
+
+    debut = models.TimeField(
+        max_length=100,
+        blank=False,
+        null=False,
+        default='08:00'
+    )
+
+    fin = models.TimeField(
+        max_length=100,
+        blank=False,
+        null=False,
+        default='09:00'
+    )
+
+
+class RollDetail(models.Model):
     date = models.DateField(
         blank=False,
         null=False,
@@ -114,6 +143,23 @@ class Roll(models.Model):
         default=''
     )
 
-    def __str__(self):
-        return self.name
+    roll = models.ForeignKey(
+        Roll,
+        on_delete=models.CASCADE,  # necessaire selon la version de Django
+        null=True
+    )
+
+    debut = models.TimeField(
+        max_length=100,
+        blank=False,
+        null=False,
+        default='08:00'
+    )
+
+    fin = models.TimeField(
+        max_length=100,
+        blank=False,
+        null=False,
+        default='09:00'
+    )
 

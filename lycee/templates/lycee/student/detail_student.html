@@ -2,20 +2,67 @@
 
 {% if liste %}
     {% block title %}
-        <h3>Details of a student</h3>
     {% endblock %}
 
     {% block content %}
-        <div class="contain">
-            <div class="title">{{ liste.first_name }} {{ liste.last_name }}</div>
-            <div class="list">{{ liste.birth_date }}</div>
-            <div class="list">{{ liste.phone }}</div>
-            <div class="list">{{ liste.email|lower }}</div>
-            <div class="list">{{ liste.cursus }}</div>
-            <button class="button2" type="cancel">
-                Modifier
-            </button>
+        <div class="margin">
+            <b>Details of a student</b>
+            <div class="contain3 card">
+                <div class="title">{{ liste.first_name }} {{ liste.last_name }}</div>
+                <div class="list">{{ liste.birth_date }}</div>
+                <div class="list">{{ liste.phone }}</div>
+                <div class="list">{{ liste.email|lower }}</div>
+                <div class="list">{{ liste.cursus }}</div>
+                <button class="button2" type="cancel">
+                    <a href="/lycee/student/edit/{{liste.id}}">
+                        Modifier
+                    </a>
+                </button>
+            </div>
         </div>
+
+        {% if absences %}
+        <div class="margin">
+            <b>Absence(s)</b>
+            <div class="contain3 card">
+
+                {% for abs in absences %}
+                    {% if abs.roll_id != NULL %}
+                    <a href="/lycee/rolls/details/{{abs.roll_id}}">
+                         <div class="description contain4" style="color: red">
+
+                             <b>{{abs.date}}&nbsp;<div class="hours">{{abs.debut}}-{{abs.fin}}</div></b>
+
+                             <div class="helptext left">Appel de la Classe</div>
+                         </div>
+                    </a>
+                    {% else %}
+                    <a>
+                         <div class="description contain4" style="color: red">
+                             <b>{{abs.date}}&nbsp;<div class="hours">{{abs.debut}}-{{abs.fin}}</div></b>
+
+                             {% if abs.cause %}
+                                <i class="left">"{{abs.cause}}"</i>
+                             {% else %}
+                                 <div class="helptext left" style="margin-left: 20px;">Sans motif</div>
+                             {% endif %}
+
+                         </div>
+                    </a>
+                    {% endif %}
+                {% endfor %}
+
+            </div>
+        </div>
+        {% else %}
+        <div class="margin">
+            <b>Absence(s)</b>
+            <div class="contain3 card">
+                Pas d'absences enregistrées
+            </div>
+        </div>
+        {% endif %}
+
     {% endblock %}
 {% else %}
     <p>No student to show.</p>

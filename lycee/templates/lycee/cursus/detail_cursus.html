@@ -3,20 +3,23 @@
 {% if liste %}
 
     {% block title %}
-        <h3>Details of a Cursus</h3>
     {% endblock %}
 
     {% block content %}
-        <div class="containerFlex2">
+        <div class="margin">
+            <b>Détails du Cursus </b>
+            {{ cursus.name }}
+
             {% for student in liste %}
-                <div class="contain">
+                <div class="contain3 card">
                     <a href="/lycee/student/{{student.id}}">{{student.first_name}} {{student.last_name}}</a>
-                    <div class="description">{{student.cursus}}</div>
+                    <div class="helptext">{{student.email}}</div>
                 </div>
             {% endfor %}
+
         </div>
     {% endblock %}
 
 {% else %}
-    <p>No student to show.</p>
+    <p>No cursus detail to show.</p>
 {% endif %}

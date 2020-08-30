@@ -1,0 +1,26 @@
+{% extends "master.html" %}
+
+{% if liste %}
+
+    {% block title %}
+    {% endblock %}
+
+    {% block content %}
+        <div class="margin">
+            <b>Liste des Appels</b>
+            <div class="contain3 card">
+            {% for roll in liste %}
+                 <a href="/lycee/rolls/details/{{roll.id}}">
+                     <div class="description contain">
+                         <b>{{roll.date}}&nbsp;<div class="helptext">{{roll.debut}}-{{roll.fin}}</div></b>
+                         {{roll.cursus.name}}
+                    </div>
+                 </a>
+            {% endfor %}
+            </div>
+        </div>
+    {% endblock %}
+
+{% else %}
+    <p>No call to show.</p>
+{% endif %}

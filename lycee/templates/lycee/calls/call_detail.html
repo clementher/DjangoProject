@@ -1,0 +1,31 @@
+{% extends "master.html" %}
+
+{% if liste %}
+
+    {% block title %}
+    {% endblock %}
+
+    {% block content %}
+        <div class="margin">
+            <b>{{ roll.cursus.name }} : Appel du {{roll.date}}</b>&nbsp;{{roll.debut}}-{{roll.fin}}
+            <div class="contain3 card">
+            {% for roll in liste %}
+                {% if roll.absent == 1 %}
+                <div class="description contain" style="color: red">
+                    <b>Absent&nbsp;</b>
+                    <a class="left" href="/lycee/student/{{roll.student.id}}">{{roll.student.email}}</a>
+                </div>
+                {% else %}
+                <div class="description contain">
+                    <b>Présent&nbsp;</b>
+                    <a class="left" href="/lycee/student/{{roll.student.id}}">{{roll.student.email}}</a>
+                </div>
+                {% endif %}
+
+            {% endfor %}
+        </div>
+    {% endblock %}
+
+{% else %}
+    <p>No call to show.</p>
+{% endif %}
